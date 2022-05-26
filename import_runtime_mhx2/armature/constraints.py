@@ -105,6 +105,8 @@ class CIkConstraint(CConstraint):
         cns = CConstraint.build(self, pb, rig, parser)
         cns.target = rig
         cns.subtarget = self.subtar
+        if self.useTail == 1:
+            self.useTail = True
         cns.use_tail = self.useTail
 
         #self.pos_lock Array 1 1 1
