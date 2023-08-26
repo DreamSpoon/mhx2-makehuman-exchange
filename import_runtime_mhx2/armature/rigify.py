@@ -178,7 +178,6 @@ def rigifyMhx(context, parser, taken={}):
             bones[bone.parent].child = eb.name
 
     bpy.ops.object.mode_set(mode='OBJECT')
-
     for pb in rig.pose.bones:
         bone = bones[pb.name]
         bone.lockLocation = pb.lock_location
@@ -459,7 +458,7 @@ def setBoneName(bone, gen):
 def fixConstraint(cns1, cns2, gen, bones):
     for key in dir(cns1):
         if ((key[0] != "_") and
-            (key not in ["bl_rna", "type", "rna_type", "is_valid", "error_location", "error_rotation", "is_proxy_local"])):
+            (key not in ["bl_rna", "type", "rna_type", "is_valid", "error_location", "error_rotation", "is_proxy_local", "is_override_data"])):
             setattr(cns2, key, getattr(cns1, key))
 
     if hasattr(cns2, "target"):

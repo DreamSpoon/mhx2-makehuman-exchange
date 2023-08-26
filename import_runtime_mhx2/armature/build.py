@@ -103,15 +103,15 @@ def buildRig(mhHuman, mhSkel, cfg, context):
                 if bone.layers & layer != 0:
                     pb = rig.pose.bones[bone.name]
                     pb.bone_group = bgrp
-
-    for bname,constraints in parser.constraints.items():
-        try:
-            pb = rig.pose.bones[bname]
-        except KeyError:
-            print("No such bone:", bname)
-            continue
-        for cns in constraints:
-            cns.build(pb, rig, parser)
+    if not cfg.useRigify:
+        for bname,constraints in parser.constraints.items():
+            try:
+                pb = rig.pose.bones[bname]
+            except KeyError:
+                print("No such bone:", bname)
+                continue
+            for cns in constraints:
+                cns.build(pb, rig, parser)
 
     if len(parser.gizmos) > 0:
         empty = bpy.data.objects.new("%s:Gizmos" % rname, None)
